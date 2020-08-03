@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block nav-authors %}
+    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Авторы</a>
+{% endblock %}
+
+{% block content %}
+    <p class="h5">Все авторы</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Год</th>
+            <th scope="col">Страна</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for author in object_list %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ author.full_name }}</td>
+            <td>{{ author.birth_year }}</td>
+            <td>
+                <span class="badge badge-success badge-pill">{{ author.country }}</span>
+            </td>
+            
+        </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+{% endblock %}

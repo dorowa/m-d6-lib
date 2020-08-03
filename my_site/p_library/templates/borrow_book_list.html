@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block nav-borrow %}
+    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Долги</a>
+{% endblock %}
+
+{% block content %}
+    <p class="h6">Все возвращенные</p>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название книги</th>
+            <th scope="col">Друг</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Читал</th>
+            <th scope="col">Состояние</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for borrow in dataset %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ borrow.book.title }}</td>
+                    <td>{{ borrow.friend.full_name }}</td>
+                    <td>
+                        <span class="badge badge-primary badge-pill">{{ borrow.borrow_date|date:'d-m-Y' }}</span>
+                    </td>
+                    <td>
+                        <span class="badge badge-success badge-pill">{{ borrow.borrow_date|timesince:borrow.return_date }}</span>
+                    </td>
+                    <td>{{ borrow.state_after}}</td>
+                </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+{% endblock %}

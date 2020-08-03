@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block nav-books %}
+    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Книги</a>
+{% endblock %}
+{% block content %}
+    <h4>Тут собрано {{ books|length }} книг из моей личной коллекции.</h4>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Номер</td>
+                <th scope="col">Название</td>
+                <th scope="col">ISBN</td>
+                <th scope="col">Описание</td>
+                <th scope="col">Год</td>
+                <th scope="col">Автор</td>
+                <th scope="col">Страна</td>
+                <th scope="col">Издательство</td>
+                <th scope="col">Копий</td>
+                <th scope="col">Изм</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+        <tr>
+            <th class="text-center" scope="cell">{{ forloop.counter }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.ISBN }}</td>
+            <td>{{ book.description }}</td>
+            <td>{{ book.year_release }}</td>
+            <td>{{ book.author.full_name }}</td>
+            <td class="text-center">{{ book.author.country }}</td>
+            <td >{{ book.publisher.name }}</td>
+            <td class="text-center">{{ book.copy_count }}</td>
+            <td>
+                <div class="d-flex flex-column align-items-center p-1">
+                    <form action="/index/book_increment/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{book.id}}" />
+                        <input class="btn btn-success rounded-circle" type="submit" value="&#9651;" />
+                    </form>
+                    <form action="/index/book_decrement/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value="{{book.id}}" />
+                        <input class="btn btn-danger rounded-circle" type="submit" value="&#9661;" />
+                    </form>
+                </div>
+            </td>
+        </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

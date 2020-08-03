@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block nav-friends %}
+    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Друзья</a>
+{% endblock %}
+
+{% block content %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Ретинг</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for friend in object_list %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td><a href="/friend/edit/{{ friend.id }}">{{friend.full_name }}</a></td>
+            <td>{{ friend.phone }}</td>
+            <td>
+                <span class="badge badge-primary badge-pill">{{ friend.rating }}</span>
+            </td>
+        </tr>
+        {% endfor%}
+    </tbody>
+</table>
+{% endblock %}

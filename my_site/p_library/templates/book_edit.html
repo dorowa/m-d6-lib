@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block nav-begin %}
+    <a class="nav-link active" href="/">Начало</a>
+{% endblock %}
+
+{% block content %}
+<p class="h6">Редактировать книгу</p>
+<hr>
+<div class="d-flex justify-content-around align-items-end">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{ form }}
+        </table>
+        <p class="p-0 m-0">
+        <input type="submit" class="btn btn-success"
+            value="Сохранить">
+        </p>
+    </form>
+    <form action="delete/">
+        {% csrf_token %}
+        <button class="btn btn-danger">Удалить</button>
+    </form>
+</div>
+{% endblock %}

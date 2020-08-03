@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block nav-begin %}
+    <a class="nav-link active" href="/">Начало</a>
+{% endblock %}
+
+{% block content %}
+    <!-- <h3>{{ title }}.</h3> -->
+    <h5>Полный список библиотеки:</h5>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Название книги</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Издатель</th>
+            <th scope="col">Год</th>
+            <th scope="col">Обложка</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <th scope="row"><a href="/book/edit/{{book.id}}">{{forloop.counter }}</a></th>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author.full_name }}</td>
+                <td>{{ book.publisher.name }}</td>
+                <td>{{ book.year_release }}</td>
+                <td>
+                    {% if book.book_img %}
+                        <a href="{{ book.book_img.url }}"><img src='{{ book.book_img.url }}' width="100" alt="book cover"></a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h6>Всего {{ books|length }} книг.</h6>
+{% endblock %}
+
+
+
+            
+    

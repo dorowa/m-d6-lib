@@ -1,0 +1,82 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Моя библиотека</title>
+  </head>
+  <body>
+  <div class="container">
+    <div class="row m-0 p-0">
+        <div class="column col-1 rounded-left p-0 m-0" style="background-color: #417690">
+          <img src="{% static 'img/final.png' %}" width="100" style="opacity: 100%; width: 100%;">
+        </div>
+        <div class="column col-11 text-center pt-4 pl-1 rounded-right" style="background-color: #417690; color: white;">
+            <span class="h3">Моя библиотека</span>
+        </div>
+    </div>
+    {% block nav %}
+    <ul class="nav nav-tabs mt-1">
+      <li class="nav-item">
+        {% block nav-begin %}<a class="nav-link" href="/">Начало</a>{% endblock %}
+      </li>
+      <li class="nav-item dropdown">
+        {% block nav-books %}<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Книги</a>{% endblock %}
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/book/add">Новая книга</a>
+          <a class="dropdown-item" href="/index/">Добавить копию</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        {% block nav-publishers %}<a class="nav-link" href="/publishers/">Издатели</a>{% endblock %}
+      </li>
+      <li class="nav-item dropdown">
+        {% block nav-authors %}<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Авторы</a>{% endblock %}
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/author/create">Новый автор</a>
+          <a class="dropdown-item" href="/author/multiple">Авторы пакетом</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/author/list">Все авторы</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        {% block nav-borrow %}<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Долги</a>{% endblock %}
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/borrow/new">Выдать книгу</a>
+          <a class="dropdown-item" href="/borrow/list">Все долги</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/borrow/list2">Все возвраты</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        {% block nav-friends %}<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Друзья</a> {% endblock %}
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/friend/add">Добавить друга</a>
+          <a class="dropdown-item" href="/friend/list">Все друзья</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/">Войти</a>
+      </li>
+    </ul>
+    {% endblock %}
+    <hr>
+    <div class="d-flex flex-column">
+    {% block content %}
+
+    {% endblock %}
+    </div>
+    <hr>
+  </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'js/jquery-3.5.1.slim.min.js'%}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

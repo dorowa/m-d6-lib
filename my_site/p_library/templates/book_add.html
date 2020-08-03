@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block nav-books %}
+    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Книги</a>
+{% endblock %}
+
+{% block content %}
+<p class="h5">Добавить книгу</p>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-warning" value="Сохранить">
+</form>
+{% endblock %}

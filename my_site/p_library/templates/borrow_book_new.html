@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block nav-borrow %}
+    <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Долги</a>
+{% endblock %}
+
+{% block content %}
+<p class="h6">Выдать книгу</p>
+<hr>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-warning" value="Сохранить">
+</form>
+{% endblock %}

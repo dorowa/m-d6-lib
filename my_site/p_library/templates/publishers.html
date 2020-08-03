@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block nav-publishers %}
+    <a class="nav-link active" href="/publishers/">Издатели</a>
+{% endblock %}
+{% block content %}
+    <!-- <h3> {{ title }}. </h3> -->
+    <h4>Список {{ publishers|length }} издательств моей личной коллекции.</h4>
+    <hr>
+    {% for publisher in publishers %}
+        <ul class="list-group flex-fill">
+        <li class="list-group-item">
+            {% if publisher.rating >= 5 %}
+                <p class="m-0" style="color: green; width:100%;">
+            {% elif publisher.rating <= -5 %}
+                <p class="m-0" style="color: red">
+            {% else %}
+                <p class="m-0" style="color: orange">
+            {% endif %}
+                    {{ publisher.name }}, {{ publisher.description }}, год создания: {{ publisher.found_date }}, рейтинг: {{ publisher.rating }}
+                </p>
+            <span class="d-flex p-1">
+                <form action="/publishers/publisher_increment/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{publisher.id}}" />
+                    <input class="btn btn-success rounded-circle" type="submit" value="&#128077;" />
+                </form>
+                <form action="/publishers/publisher_decrement/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{publisher.id}}" />
+                    <input class="btn btn-danger rounded-circle" type="submit" value="&#128078;" />
+                </form>
+            </span>
+            <ul class="list-group">
+                {% for book in publisher.books.all %}
+                    <li class="list-group-item">{{ book.author.full_name }}, {{ book.title }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        </ul>
+    {% endfor %}
+    
+{% endblock %}
