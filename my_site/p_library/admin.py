@@ -17,7 +17,7 @@ class BookAdmin(admin.ModelAdmin):
             return format_html(f'<img src="{obj.book_img.url}" width="100"/>')
         return format_html(f'<img src="" width="100">')
 
-    image_tag.short_description = 'Image'   
+    image_tag.short_description = 'Обложка'   
 
 
 @admin.register(Author)
